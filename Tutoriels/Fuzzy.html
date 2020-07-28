@@ -1,0 +1,275 @@
+
+<h1>
+    Les systèmes flous, ou Fuzzy Systems
+</h1>
+
+<h2>
+    Principe de fonctionnement
+</h2>
+
+<p>
+    Le principe de la logique floue est similaire au chaînage avant à l'exception qu'au lieu de en paramètre des faits
+    et règles binaires (vrai ou faux), la logique floue prend en paramètre des faits appartenant à un gradient de 0 à 1
+    et donc des règles qui prennent en compte le caractère variable des faits.
+</p>
+
+<p>
+    Dans les systèmes experts flous, on doit définir de différents objets:
+    <ul>
+        <li>
+            <u><b>Les faits:</b></u>
+            <p>
+                Dans ce type de système expert, les faits sont des paramètres auxquels on associe
+                un score pour juger si ce paramètre est vrai ou bon;
+            </p>
+        </li>
+
+        <li>
+            <u><b>Les fuzzy sets:</b></u> 
+            <p>
+                Les fuzzy sets sont des fonctions qui permettent de juger les faits selon différents
+                critères;
+            </p>
+        </li>
+
+        <li>
+            <u><b>Les règles:</b></u>
+            <p>
+                Les règles se mettre sont la forme <b>Si</b> <i>fuzzy sets de condition</i> <b>alors</b>
+                <i>fuzzy sets de conclusion</i>. En effet, les règles évaluent l'appartenance des faits initiaux aux fuzzy sets
+                de condition et en déduit les degrés d'appartenance des faits résulants aux fuzzy sets de conclusion.
+            </p>
+        </li>
+    </ul>
+</p>
+
+<p>
+    NB: ces concepts seront présentés et expliqués plus en détails dans leurs sections respectives.
+</p>
+
+
+<h2>
+    Faits
+</h2>
+
+<p>
+    <u>Définition</u>
+    <p>
+        Les faits sont des caractéristiques qui définissent le système. En logique floue, elles sont représentées par un titre et
+        un score compris entre 0 et 1.
+    </p>
+
+    <u>Implémentation</u>
+    <p>
+        Dans notre implémentation, nous avons définit des classes pour les faits, fuzzy sets et les règles (comme pour les chainnages
+        avant et arrières).<br>
+        Pour les faits, on n'a besoin que de deux paramètres: le nom ou titre du fait et le score associé au fait (on peut y ajouter
+        un parmaètre de description).
+    </p>
+    <p>Notre implémentation en Pyhton:</p>
+    <div style="background: #202020; overflow:auto;width:auto;padding:.2em .6em;">
+        <pre style="margin: 0; line-height: 125%">
+            <span style="color: #6ab825; font-weight: bold">class</span> <span style="color: #447fcf; text-decoration: underline">Fact_Fuzzy</span><span style="color: #d0d0d0">:</span><br>
+            <br>
+            <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">__init__</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">name:</span> <span style="color: #24909d">str</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">value:</span> <span style="color: #24909d">float</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">description:</span> <span style="color: #24909d">str</span><span style="color: #d0d0d0">):</span>
+            <blockquote>
+                <span style="color: #24909d">self</span><span style="color: #d0d0d0">.name</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">name</span><br>
+                <span style="color: #24909d">self</span><span style="color: #d0d0d0">.value</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">value</span><br>
+                <span style="color: #24909d">self</span><span style="color: #d0d0d0">.description</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">description</span>
+            </blockquote>
+        </pre>
+    </div>
+    <br>
+</p>
+
+<h2>
+    Fuzzy Set
+</h2>
+
+<p>
+    <u>Définition</u>
+    <p>
+        Les fuzzy set, en Français "ensembles flous" sont des ensembles caractérisant le degré d'appartenance d'un fait à une certaine
+        caractéristique. Par exemple un fuzzy set nommé "grand" pourra contenir les éléments caractérisés comme grands.
+    </p>
+    <p>
+        Dans le contexte des systèmes experts flous, ces ensembles sont représentés par des <b>fonctions d'appartenance</b> qui valent 1 pour les éléments qui 
+        appartiennent à l'ensemble et 0 pour ceux qui n'y appartiennent pas. Puisque la logique floue évalue les faits sur une échelle 
+        continue de 0 à 1, ces fonctions comportent des transitions continues entre les états à 1 et ceux à 0. Cependant la forme de ces
+        transitions peut être variable et est déterminée par l'expert à la création des fuzzy set en fonction du cas d'application. On 
+        peut alors trouver des fonctions trapèzes (les plus utilisées) mais aussi des gaussiennes etc..
+    </p>
+
+    <p>
+        Exemple de fonction d'appartenance :<br>
+        <br>
+            <img src="/assets/images/fuzzy_set_example.png" width="70%" style="display: block; margin-left: auto; margin-right: auto"/>
+        </br>
+    </p>
+
+    <u>Implémentation</u>
+    <p>
+        Pour définir la classe des fuzzy sets, on n'a besoin que de deux paramètres: le nom du fuzzy set (qui reflète la
+        caractéristique à tester) et la fonction d'appartenance.
+    </p>
+    <p>Notre implémentation en Pyhton:</p>
+    <div style="background: #202020; overflow:auto;width:auto;padding:.2em .6em;">
+        <pre style="margin: 0; line-height: 125%">
+            <span style="color: #6ab825; font-weight: bold">class</span> <span style="color: #447fcf; text-decoration: underline">Fuzzy_set</span><span style="color: #d0d0d0">:</span><br>
+            <br>
+            <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">__init__</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">name:</span> <span style="color: #24909d">str</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">description:</span> <span style="color: #24909d">str</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">function):</span>
+            <blockquote>
+                <span style="color: #24909d">self</span><span style="color: #d0d0d0">.name</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">name</span><br>
+                <span style="color: #24909d">self</span><span style="color: #d0d0d0">.function</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">function</span><br>
+                <span style="color: #24909d">self</span><span style="color: #d0d0d0">.description</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">description</span>
+            </blockquote>
+        </pre>
+    </div>
+    <br>
+</p>
+
+<h2>
+    Règles
+</h2>
+
+<p>
+    <u>Définition</u>
+    <p>
+        La définition des règles de change pas par rapport aux chainnage avant et arrière, ce sont toujours des implications de la 
+        forme <b>Si</b> <i>conditions</i> <b>Alors</b> <i>conclusions</i>. Ce qui change, en revanche est l'implémentation.
+    </p>
+    <p>
+        En logique floue, les conditions et conclusions nes ont plus des faits mais les valeurs d'appartenance des faits à des fuzzy set.
+        En effet, les règles s'appliquent de la manière suivante (pour une condition et une conclusion):
+        <ul>
+            <li><p>On récupère le score du fait de condition;</p></li>
+            <li><p>
+                On évalue l'appartenance du fait au fuzzy set de conclusion:<br>
+                <i>appartenance=f(score)</i><br>
+                avec f la conction d'appartenance du fuzzy set de condition;
+            </p></li>
+            <li><p>
+                On déduit de cette valeur d'appartenance une fonction de résultat à partir de la fonction d'appartenance
+                du fuzzy set de conclusion. Dans notre implémentation, nous avons décider de "couper" la fonction de conclusion à
+                la valeur d'appartenance:<br>
+                <i>fonction_résultat=max(appartenance; fonction_conclusion).</i>
+            </p></li>
+        </ul>
+    </p>
+
+    <p>
+        <u>Explication graphique</u>
+        <br>
+            <img src="assets/images/fuzzy_graphic_explaination.png" width="80%" style="display: block; margin-left: auto; margin-right: auto"/>
+        </br>
+    </p>
+
+    <u>Généralisation</u>
+    <p>
+        Pour généraliser cette application de règle à une règle avec plusieurs conditions et conclusions sous la forme d'une proposition
+        booléenne, on doit choisir une méthode pour interpréter les ET et les OU. Ce choix revient encore une fois à l'expert en 
+        focntion du cas d'application. Dans notre implémentation, nous avons décider d'interpréter les ET comme des maximum et les
+        OU comme des minimum comme illustrer dans l'exemple ci-dessus.
+    </p>
+
+    <u>Implémentation</u>
+    <p>
+        Pour la classe des règles, on a besoin de deux paramètres: la liste des conditions et la liste des conclusions. Dans notre
+        implémentation, les conditions et conclusions ont la formes de couples <i>(fait/fuzzy set)</i> pour pouvoir associer le bon fait
+        au fuzzy set à évaluer ou a déduire.
+    </p>
+    <p>Notre implémentation en Pyhton:</p>
+    <div style="background: #202020; overflow:auto;width:auto;padding:.2em .6em;">
+        <pre style="margin: 0; line-height: 125%">
+            <span style="color: #6ab825; font-weight: bold">class</span> <span style="color: #447fcf; text-decoration: underline">Rule</span><span style="color: #d0d0d0">:</span><br>
+            <br>
+            <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">__init__</span><span style="color: #d0d0d0">(</span><span style="color: #24909d">self</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">conditions:</span> <span style="color: #24909d">list</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">conclusions:</span> <span style="color: #24909d">list</span><span style="color: #d0d0d0">,</span> <span style="color: #d0d0d0">description:</span> <span style="color: #24909d">str</span><span style="color: #d0d0d0">):</span>
+            <blockquote>
+                <span style="color: #24909d">self</span><span style="color: #d0d0d0">.conditions</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">conditions</span><br>
+                <span style="color: #24909d">self</span><span style="color: #d0d0d0">.conclusions</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">conclusions</span><br>
+                <span style="color: #24909d">self</span><span style="color: #d0d0d0">.description</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">description</span>
+            </blockquote>
+        </pre>
+    </div>
+    <br>
+</p>
+
+<h2>
+    Hedges
+</h2>
+
+<p>
+    <u>Définition</u>
+    <p>
+        Les hedges sont des variables linguistiques, donc des mots, qui permettent de modifier la forme des fuzzy sets. Ils sont
+        utilisés pour adapter plus finement les règles et les fuzzy sets au cas d'application.
+    </p>
+    <p>
+        Par exemple, si on veut filtrer seulement les personnes "Très" grandes dans le fuzzy set de "Grand" pour une règle,
+        il suffit d'ajouter le Hedge "Très" à la condition "Grande taille". Ce hedge modifiera alors la fonction d'appartenance,
+        en la mettant au carré par exemple.
+    </p>
+
+    <p>
+        <p>Exemple de quelques hedges:</p>
+        <br>
+            <img src="assets/images/hedge_examples.png" width="70%" style="display: block; margin-left: auto; margin-right: auto"/>
+        </br>
+        <p>Ici &mu;<sub>A</sub> est la fonction d'appartenance</p>
+    </p>
+
+    <u>Implémentation</u>
+    <p>
+        Pour implémenter les hedge, il y a deux possibilités: Modifier les fuzzy set dans le moteur d'inférence ou les modifier
+        directement dans la définition de la classe des règles. Nous avons décider de choisir la seconde option afin d'aléger
+        le code du moteur d'inférence
+    </p>
+    <p>
+        Dans les deux cas, il est à noter qu'en argument de la classe des règles, les conditions et conclusions ne sont plus
+        sous la forme de couples <i>(fait/fuzzy set)</i> mais de triplets <i>(fait/fuzzy set/hedge)</i>
+    </p>
+</p>
+
+<h2>
+    Algorithme
+</h2>
+
+<p>
+    <u>
+        Principe:
+    </u>
+    <p>
+        Dans l'algorithme de logique floue, on évalue toutes les règles à la suite. On divise l'inférence en trois étapes:
+        <ul>
+            <li>
+                <u><b>La fuzzification:</b></u>
+                <p>
+                    Cette première étape consiste à évaluer l'appartenance de tous les faits initiaux aux courbes des fuzzy sets
+                    de condition de chaque règles. Pour cela, pour chaque fuzzy set, on prend simplement la valeur renvoyeé par
+                    la fonction du fuzzy set évaluée au score du fait initial comme expliqué dans la section "Règles";
+                </p>
+            </li>
+
+            <li>
+                <u><b>L'application des règles:</b></u> 
+                <p>
+                    Dans cette étape, pour chaque règle, ou déduit de la fuzzification des fuzzy sets de condition une valeur 
+                    qui évalue le degré d'affectation de la règle puis une fonction résultat pour chaque faits en conclusions.
+                </p>
+                <p>
+                    Puis, après affectation de toutes les règles, pour chaque fait de sortie (ou conclusion), on obtient une liste
+                    de courbes correspondant à chaque fois que ce fait a été en conclusion d'une règle;
+                </p>
+            </li>
+
+            <li>
+                <u><b>La défuzzification:</b></u>
+                <p>
+                    Cette dernière étape permet, pour chaque fait de sortie, de déduire le résultat souhaité de la liste de courbes.
+                    Cette étape dépend donc beaucoup du contexte de l'utilisation et le choix de la méthode de defuzzification sera donc
+                    choisie par l'utilisateur ou par l'expert qui défini les règles.
+                </p>
+            </li>
+        </ul>
+    </p>
+</p>

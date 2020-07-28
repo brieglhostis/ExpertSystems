@@ -1,0 +1,119 @@
+
+<h1>
+    Tutoriel : Chaînage arrière (Backward Chaining)
+</h1>
+
+<p>
+    Comme tout système expert (SE), ceux en chaînage arrière (appelés BC pour Backward Chaining dans la suite) se basent sur un ensemble de règles et de faits, un moteur d'inférence, ainsi qu'une interface utilisateur. 
+</p>
+
+<div class="objectif_bc">
+    <h2>
+        L'objectif d'un système expert en chaînage arrière
+    </h2>
+
+    Ce qui différencie un système en backward chaining des systèmes experts en chaînage avant, c'est le raisonnement qui est fait par le moteur d'inférence. En réalité, il y a deux manières de voir l'objectif d'un BC.
+
+    <h3>
+        Déterminer la véracité d'un fait
+    </h3>
+
+    <p>
+        Pour ce type d'utilisation, le système expert va permettre de déterminer si un fait est réel ou non. Pour mieux comprendre, prenons l'exemple d'un restaurant, dans lequel un traitement spécial doit être appliqué pour les clients importants. Un système expert BC va alors être utilisé pour aider les employés à déterminer si un client en particulier est important ou non. 
+    </p>
+
+    <p>
+        En effet, il peut être compliqué pour un employé de savoir immédiatement si un client est important. A l'inverse, le système expert va poser des questions simples :
+        <ul>
+            <li>Le client est-il un habitué ?</li>
+            <li>Le client porte-t-il une perruque ?</li>
+        </ul> 
+        Il va ensuite utiliser les règles de sa base de connaissances afin d'apporter une réponse au questionnement initial.
+    </p>
+
+    <img src="assets/images/Backward-chaining-decision-tree.png" alt="Exemple de la perte de cheveux" style="display: block;
+    margin-left: auto;
+    margin-right: auto;" />
+
+    <p>
+        Ainsi, dans l'exemple ci-dessus, on voit que l'ordinateur va poser des questions relativement simples à l'utilisateur telles que le nombre de cheveux perdus, afin de terminer si la personne en question est victime de perte de cheveux ou non. Bien évidemment, plus le sujet est complexe, plus un système expert se révèle utile.
+    </p>
+
+    <h3>
+        Connaître les origines d'un fait
+    </h3>
+
+    <p>
+        Ici, le système expert va plutôt être utilisé pour connaître les causes d'un fait qui est avéré. En effet, comme on le verra plus tard, le BC va poser des questions pour avoir des informations, et affiche finalement le raisonnement qui lui a permis d'aboutir au résultat, c'est-à-dire la succession des règles qui ont été utilisés.
+    </p>
+
+    <p>
+        Pour illustrer ce type d'utilisation, considérons cette fois-ci le cas de l'explosion d'un laboratoire. Afin de connaître les causes de cet incident, un SE va poser des questions simples telles que :
+        <ul>
+            <li>Faisait-il plus de 30°C ?</li>
+            <li>Y-a-t-il eu une coupure de courant ?</li>
+        </ul> 
+        Une fois le raisonnement terminé, le SE va alors afficher celui-ci en détaillant les règles qui ont conduits à la conclusion, c'est-à-dire à l'explosion. Cette explication permet alors de comprendre quels sont les faits qui ont conduits à une telle situation.
+    </p>
+</div>
+
+<div class="fonctionnement_bc">
+    <h2>
+        Comment ça fonctionne ?
+    </h2>
+
+    <p>
+        Alors concrètement, comment fonctionne un système expert en chaînage arrière. Pour ce qui est de la base des faits ou des règles, celle-ci est strictement identique à celle que l'on peut trouver dans le chaînage avant donc pas besoin de revenir là dessus.
+    </p>
+
+    <p>
+        En réalité, la grande différence se situe dans le moteur d'inférence, qui va fonctionner de cette manière :
+        <ol>
+            <li>
+                Le point de départ est un fait. Le moteur d'inférence recherche alors dans toutes les règles celles qui ont comme conclusion le fait de départ, et s'arrête sur la première qu'il trouve et qui remplit cette condition.
+            </li>
+            <li>
+                A partir de cette règle, il vérifie si toutes les conditions nécessaires pour appliquer cette règle sont réunies. Il regarde alors chaque fait présent dans les conditions, et il y a alors deux possibilités :
+                <ul>
+                    <li>
+                        Soit le fait est déjà dans la base des faits, auquel cas il passe au fait suivant.
+                    </li>
+                    <li>
+                        Soit le fait est inconnu, auquel cas le moteur d'inférence repart au début de manière récursive en prenant comme point de départ le fait en question.
+                    </li>
+                </ul>
+            </li>
+            <li>
+                Si jamais la règle est applicable (toutes les conditions sont vérifiées), alors on a terminé et on sait d'où vient le fait en entrée. En revanche, si elle ne l'est pas, on passe tout simplement à la règle suivant en repartant à l'étape 2.
+            </li>
+            <li>
+                Enfin, une dernière situation se présente : si jamais aucune règle n'a pour conclusion le fait en question, ou si aucune n'est applicable, alors le moteur d'inférence va directement poser la question à l'utilisateur pour savoir si le fait est vrai ou non.
+            </li>
+        </ol>
+    </p>
+
+    <figure>
+        <img src="assets/images/backward-schema.jpeg" alt="Schéma simplifié" style="display: block;
+        margin-left: auto;
+        margin-right: auto;"/>
+        <figcaption style="text-align: center">Un schéma simplifié du fonctionnement du moteur d'inférence d'un système expert en chaînage arrière</figcaption>
+    </figure>
+
+</div>
+
+<div>
+    <h2>
+        Pour conclure
+    </h2>
+
+    <p>
+        Maintenant que vous savez plus en détail comment fonctionne un système expert en chaînage arrière et ce pourquoi il est utilisé, vous avez très certainement envie de vous lancer dans l'implémentation, alors lancez-vous ! 
+    </p>
+
+    <p>
+        Vous trouverez un lien vers un Google Colaboratory sur la page des exercices accessible depuis le menu latéral, sur lequel vous pourrez apprendre comment implémenter les algorithmes en python et construire vous-même votre système expert.
+    </p>
+
+    <br>
+    <br>
+</div>

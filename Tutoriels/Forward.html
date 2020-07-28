@@ -1,0 +1,99 @@
+<h1>
+    Tutoriel : Chaînage avant (Forward Chaining)
+</h1>
+
+<h2>
+    Principe de fonctionnement
+</h2>
+
+<p>
+    Le chaînage avant est une méthode déduction qui applique des règles en partant des prémisses pour en déduire de
+    nouvelles conclusions. Ces conclusions enrichissent la mémoire de travail et peuvent devenir les prémisses d'autres
+    règles.
+</p>
+
+<p>
+    Le chaînage avant commence avec les données disponibles et utilise des règles d’inférence pour extraire davantage de
+    données jusqu'à ce qu'un but (une conclusion) soit atteint. Un moteur d’inférence qui utilise le chaînage avant
+    effectue une recherche dans les règles d'inférence jusqu'à ce qu'il trouve un antécédent (<b><i>Si</i></b> l'article)
+    qui est connu pour être vrai. Une fois trouvé, il peut en déduire que la conséquence (<b><i>alors</i></b> l'article)
+    est vraie aussi, ce qui entraîne l'ajout de nouvelles informations à ses données.
+    <br>
+    Les moteurs d'inférence réitèrent ce processus jusqu'à ce qu'un but soit atteint ou que plus aucune règle ne s'applique.
+    <br/>
+</p>
+
+<p>
+    Processus de fonctionnement graphique :
+    <br>
+        <img src="assets/images/image 1.png" width="35%" />
+    </br>
+</p>
+
+
+<h2>
+    Algorithme
+</h2>
+
+<p>
+    <u>
+       	Algorithme utilisé
+    </u>
+    : Data-driven algorithm
+</p>
+
+<p>
+    <u>
+        Principe
+    </u>
+    : Dans le mode de Forward chaining, le moteur d'inférence part des faits pour arriver au but, c'est-à-dire qu'il ne
+    sélectionne que les règles dont les conditions de la partie gauche sont vérifiées (∈ base de faits), puis applique
+    la première de ces règles, ce qui ajoute la conclusion à la base. Ce processus est réitéré jusqu'à ce qu'il n'y ait
+    plus de règles applicables ou que le but soit atteint.
+</p>
+
+<p>
+    <u>
+       	Algorithme :
+    </u>
+
+    <br>
+        <img src="assets/images/image 2.png" width="55%" />
+    </br>
+
+    <br>
+        <img src="assets/images/image 3.png" width="55%" />
+    </br>
+</p>
+
+<p>
+    <u>
+        Un exemple d’exécution :
+    </u>
+
+    <br>
+        <img src="assets/images/image 4.png" width="55%" />
+    </br>
+
+    <br>
+        <img src="assets/images/image 5.png" width="55%" />
+    </br>
+</p>
+
+<p>
+    <u>
+        Remarque :
+    </u>
+
+    <ul>
+        <li>
+            Qu'il soit utilisable pour différentes bases de connaissance. En effet, les systèmes experts sont des systèmes
+            dans lesquels la base de connaissance est indépendante du moteur d'inférence qui utilise le contenu de cette base.
+            La base de règles devra être lue à partir d'un fichier.
+        </li>
+
+        <li>
+            Que l'ordre dans lequel les règles sont introduites dans le fichier n’ait pas d'influence sur les résultats.
+        </li>
+    </ul>
+</p>

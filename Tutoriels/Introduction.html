@@ -1,0 +1,132 @@
+
+<h1>Introduction aux systèmes experts</h1>
+
+<h2>Définition</h2>
+    <p>
+    <br>
+        Un expert est un outil capable de reproduire les raisonnements d’un expert dans un domaine donné.
+        Il s’agit d’un sous-domaine de l’Intelligence Artificielle.
+    </br>
+    <br>
+        Un système expert est un programme interactif. C’est par des questions-réponses qu’il permet à l’utilisateur de prendre des décisions.
+    </br>
+    </p>
+
+<h2>Historique</h2>
+    <p>
+        Le premier système effectuant un raisonnement a été créé en 1965 <i>(Dendral)</i>. Le premier système expert à proprement parler est <i>MYCIN</i>
+        créé en 1972 par des chercheurs de Stanford. Dans les années 1980, les systèmes experts ont connu un engouement important qui poussait à
+        croire qu’ils seraient massivement développés dans tous les domaines d’expertises.
+        Aujourd’hui, bien qu’ils ne soient pas indispensables, ils présentent de multiples avantages et sont utilisés dans de nombreux domaines.
+    </p>
+
+<h2>Exemple</h2>
+<!-- Dans cette partie il y a un dialogue en "MYCIN" et le "Médecin"
+Les phrases de MYCIN sont associées à la classe "phrase_mycin"
+Les phrases du Médecin sont associées à la classe "phrase_medecin"
+
+Le tout est dans un div d'id "exemple_mycin"
+-->
+    <p>
+        <i>MYCIN</i> est un système expert diagnostiquant des infections sanguines. Il dialoguait avec les médecins de cette manière :
+    </p>
+
+    <div id = "exemple_mycin">
+        <div class="phrase_mycin">
+            <h4>MYCIN :</h4>
+            <p>Mes recommandations thérapeutiques seront basées sur les infections probables et les organismes infectieux potentiels suivants :</p>
+            <ul>
+                <li>Pseudomo nas aeruginosa</li>
+                <li>Klebsellia pneumoniae</li>
+                <li>Escherichia coli</li>
+                <li>Bacteroides fragilis</li>
+                <li>Enterobacter</li>
+                <li>Proteus non mirabilis</li>
+            </ul>
+            <p>Voulez-vous me donner la gravité de la maladie de M. Fred SMITH sur une échelle de 0 à 4 ?</p>
+        </div>
+        <div class="phrase_medecin">
+            <h4>Médecin :</h4>
+            <p>3</p>
+        </div>
+        <div class="phrase_mycin">
+            <h4>MYCIN :</h4>
+            <p>M. Fred SMITH présente-t-il des réactions allergiques à un quelconque agent microbien ?</p>
+        </div>
+        <div class="phrase_medecin">
+            <h4>Médecin :</h4>
+            <p>Non</p>
+        </div>
+        <div class="phrase_mycin">
+            <h4>MYCIN :</h4>
+            <p>Quel est son poids en kilos ?</p>
+        </div>
+        <div class="phrase_medecin">
+            <h4>Médecin :</h4>
+            <p>70</p>
+        </div>
+        <div class="phrase_mycin">
+            <h4>MYCIN :</h4>
+            <p>Ma recommandation thérapeutique sera, en premier choix : Pour couvrir les points - prescrire de la Gentamicine, dose 119 mg 98 h IV, pendant 10 jours ;
+                Pour couvrir le point 4, - prescrire de la Clindamycine, dose 595 mg 96 h IV, pendant 14 jours.
+                Désirez-vous éventuellement éliminer certains médicaments ?</p>
+        </div>
+        <div class="phrase_medecin">
+            <h4>Médecin :</h4>
+            <p>Oui, la Clindamycine.</p>
+        </div>
+        <div class="phrase_mycin">
+            <h4>MYCIN :</h4>
+            <p>Pour couvrir les points, donner du Chloramphénicol, dose : 1g 96 h IV, pendant 15 jours ; […]</p>
+        </div>
+    </div>
+
+    <p><i>Remarque : En plus de donner un diagnostic, MYCIN était capable d’expliquer ses décisions sous la demande du médecin.
+        MYCIN pouvait aussi acquérir de nouvelles connaissances et proposait un guide de correction d’erreur.</i></p>
+
+<h2>Utilisation</h2>
+    <p>
+    <br>Les systèmes experts sont couramment utilisés dans la finance et le secteur médical. Ils permettent par exemple de diagnostiquer des maladies.</br>
+    <br>Ils sont aussi utiles dans des applications grand public comme <i>Akinator</i>.</br>
+    </p>
+
+<h2>Fonctionnement</h2>
+    <h3>Définitions</h3>
+        <ul>
+            <li>Une <b>proposition</b> est une expression quelconque qui peut être évaluée à vrai ou à faux (ex : « le patient a un écoulement nasal »). </li>
+            <li>Un <b>fait</b> est une proposition évaluée à vrai.</li>
+            <li>Une <b>règle d’inférence</b> se présente sous la forme (prémisse) → (conclusion), où prémisse et conclusion sont des ensembles de propositions. </li>
+            <li>Une <b>base de connaissances</b> est composée d'une <b>base de faits</b> et d’une <b>base de règles</b>.</li>
+            <li>Un <b>moteur d’inférence</b> est un programme qui permet, à partir de la base de connaissances, de déduire de nouveaux faits.</li>
+        </ul>
+    <img src="assets/images/introduction_fonctionnement.png" alt="Structure d'un système expert" height="336" width="721">
+
+    <h3>Trois modes de fonctionnement</h3>
+        <p>Lorsqu’on utilise un système expert, on cherche à vérifier qu’une proposition cible est vraie ou non.
+            Pour cela il existe trois raisonnements différents.</p>
+        <h4>Forward chaining <i>(chainage avant)</i></h4>
+            <p>
+                A partir des faits, le moteur d’inférence déduit de nouveaux faits jusqu’à vérifier la cible.
+                La règle est déclenchée par la partie prémisse.
+                La conclusion en résulte.
+            </p>
+            <img src="assets/images/introduction_forward.png" alt="Représentation du chainage avant" height="279" width="484">
+        <h4>Backward chaining <i>(chainage arrière)</i></h4>
+            <p>
+                Connaissant la cible, le moteur d’inférence étudie la véracité des propositions nécessaires pour arriver à cette conclusion.
+                La règle est déclenchée par la partie conclusion.
+                Pour valider la règle, il faut que la prémisse soit un fait connu.
+            </p>
+            <img src="assets/images/introduction_backward.png" alt="Représentation du chainage arrière" height="279" width="484">
+        <h4>Fuzzy logic <i>(logique floue)</i></h4>
+            <p>
+                La logique floue a été développée pour élargir la logique binaire basée sur VRAI/FAUX.
+                Les propositions ne sont plus simplement vraies ou fausses, il y a différents degrés de véracité.
+                Pour la température d’un patient par exemple, il est peu pertinent de stocker comme proposition si oui ou non elle est de 37°C.
+                C’est plus naturel d’avoir une proposition à valeurs variables (de 30°C à 50°C)
+            </p>
+            <p>
+                Cette méthode est plus complexe que les deux types de raisonnements précédents mais elle est indispensable pour appréhender
+                des phénomènes incertains.
+            </p>
+
